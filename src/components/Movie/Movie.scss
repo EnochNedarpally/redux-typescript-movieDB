@@ -1,0 +1,62 @@
+@import '../../common/color.scss';
+.movieWrapper{
+    display: flex;
+    padding:0.6rem 1rem;
+    // justify-content: space-between;
+}
+.movieLeft{
+    flex:8;
+    width:100%;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    >h4{
+        margin-bottom: 1rem;
+    }
+    .itemInfo{
+        .infoTop{
+            display: flex;
+            align-items: center;
+            .item{
+                display: flex;
+                align-items: center;
+                margin-right:1rem;
+                >span{
+                    color:$font-secondary;
+                    font-weight: 400;
+                    margin-right: 7px;
+                }
+                >.MuiSvgIcon-root{
+                    margin-right: 7px;
+                }
+            }
+        }
+        .infoBottom{
+            .plot{
+                font-size: 0.9rem;
+                margin:10px 0;
+                font-weight: 300;
+            }
+            .details{
+                font-size: 0.9rem;
+                margin:10px 0;
+                color:$font-secondary;
+                >span{
+                    color: $font-primary;
+                    width: 100px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+.movieRight{
+    flex:4;
+    height:400px;
+    >img{
+        width:100%;
+        height:100%;
+        object-fit: contain;
+    }
+}

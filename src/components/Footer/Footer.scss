@@ -1,0 +1,16 @@
+@import "../../common/color.scss";
+.footerContainer{
+    background: $secondary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color:$font-primary;
+    h3{
+        margin: 6px 0;
+    }
+    p{
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+}
