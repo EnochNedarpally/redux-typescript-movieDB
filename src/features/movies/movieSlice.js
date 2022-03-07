@@ -2,10 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import movieApi from '../../common/api/movieApi'
 import { APIKEY } from '../../common/api/movieApiKey'
 
-const initialState = {
+// type iState = {
+//   movies:Movies[],
+//   shows:Movies[],
+//   single:SingleMovieShow[],
+// }
+
+const initialState= {
   movies:{},
-  shows:{},
+  shows:{}, 
   single:{},
+  loading:false,
+  error:false,
 }
 
 export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
@@ -17,7 +25,6 @@ export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
 export const getAsyncShows=createAsyncThunk("movies/getAsyncShows",
     async()=>{
     const response = await movieApi.get(`?s=how&apikey=${APIKEY}&type=series`)
-    
     return response.data
   } 
 )
@@ -31,7 +38,7 @@ export const getSingleMovieorShow=createAsyncThunk("movies/getSingleMovieorShow"
 
 
 export const movieSlice = createSlice({
-  name: 'movies',
+  name: 'movies', 
   initialState,
   reducers: {
     clearMovieorShow: (state) => {
@@ -39,22 +46,20 @@ export const movieSlice = createSlice({
     }
   },
   extraReducers:{
-      [getAsyncMovies.pending]:()=>{
-        console.log("Pending")
+      [getAsyncMovies.pending.type]:(state)=>{
+        state.loading=true
       },
-      [getAsyncMovies.fulfilled]:(state,{payload})=>{
-        console.log("Success")
-        return {...state,movies:payload}
+      [getAsyncMovies.fulfilled.type]:(state,{payload})=>{
+        return {...state,movies:payload,loading:false}
       },
-      [getAsyncMovies.rejected]:()=>{
-        console.log("Failed")
+      [getAsyncMovies.rejected.type]:(state)=>{
+        state.loading=false
+        state.error=true
       },
-      [getAsyncShows.fulfilled]:(state,{payload})=>{
-        console.log(" Show Success")
+      [getAsyncShows.fulfilled.type]:(state,{payload})=>{
         return {...state,shows:payload}
       },
-      [getSingleMovieorShow.fulfilled]:(state,{payload})=>{
-        console.log(" Show Success")
+      [getSingleMovieorShow.fulfilled.type]:(state,{payload})=>{
         return {...state,single:payload}
       },
   }

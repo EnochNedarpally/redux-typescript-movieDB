@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Movies} from '../../types/movie'
 import './MovieCard.scss'
-const MovieCard = ({movie}) => {
+type iProps = {
+  movie:Movies
+}
+const MovieCard:React.FC<iProps> = ({movie}) => {
  
   return (
     <Link to={`/movie/${movie.imdbID}`}>

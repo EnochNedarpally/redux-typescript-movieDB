@@ -1,23 +1,33 @@
 import { DateRangeOutlined, StarRate, Theaters, TheatersOutlined, ThumbUp } from '@mui/icons-material';
+import { AsyncThunk } from '@reduxjs/toolkit/dist/createAsyncThunk';
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../features/hook';
 import { getMovieorShow, getSingleMovieorShow,clearMovieorShow } from '../../features/movies/movieSlice';
+import { SingleMovieShow } from '../../types/movie';
 import "./Movie.scss"
 const Movie = () => {
-  const dispatch = useDispatch();
-  const item = useSelector(getMovieorShow);
+  const dispatch = useAppDispatch();
+  const item = useAppSelector<SingleMovieShow>(getMovieorShow);
+  const loading = useAppSelector<boolean>(state=>state.movies.loading);
+  console.log(loading);
   const id = useParams().id;
 
+  // type iDispatch={
+  //   getSingleMovieorShow(id:string):AsyncThunk<any, void, {}>
+  // }
   useEffect(() => {
-    dispatch(getSingleMovieorShow(id));
+    //@ts-ignore 
+    dispatch(getSingleMovieorShow(id)); 
     return(()=>{
       dispatch(clearMovieorShow());
     })
   }, [dispatch, id])
-  console.log(item)
   return (
+    <>
+    {loading && <p>Loading...!</p> }
     <div className='movieWrapper'>
       <div className="movieLeft">
         <h4>{item.Title}</h4>
@@ -60,6 +70,7 @@ const Movie = () => {
           <img src={item.Poster} alt="" />
       </div>
     </div>
+    </>
   )
 }
 

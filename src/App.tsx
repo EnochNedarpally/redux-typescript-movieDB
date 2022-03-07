@@ -12,8 +12,8 @@ function App() {
         <Header/>
           <div className='main'>
               <Routes>
-                  <Route path ="/" exact element={<Home/>}/>
-                  <Route path ="/movie/:id" exact element={<Movie/>}/>
+                  <Route path ="/movie/:id" element={<Movie/>}/>
+                  <Route path ="/"  element={<Home/>}/>
                   <Route path="*" element={<NotFound/>}/>
               </Routes>
           </div>
