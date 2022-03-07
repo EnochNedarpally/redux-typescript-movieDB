@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import { Search } from '@mui/icons-material';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import movieApi from '../../common/api/movieApi'
 // import { APIKEY } from '../../common/api/movieApiKey'
@@ -11,12 +12,20 @@ const MovieList = () => {
   const dispatch = useDispatch();
   const movies = useSelector(getAllMovies);
   const shows = useSelector(getAllShows);
+  const [input, setInput] = useState<string>("Man")
   useEffect(() => {
-    dispatch(getAsyncMovies());
-    dispatch(getAsyncShows());
-  }, [dispatch])
+    //@ts-ignore
+    dispatch(getAsyncMovies(input));
+    //@ts-ignore
+    dispatch(getAsyncShows(input));
+  }, [dispatch,input])
+  console.log(input)
   return (
     <div className='movieListContainer'>
+      <div className="inputContainer">
+        <input type="text" placeholder='Search Movies or Shows' onChange={(e)=>setInput(e.target.value)} />
+        <Search/>
+      </div>
       <h2>Movies</h2>
       <div className='movieListWrapper'>
         {!movies.Search ? (

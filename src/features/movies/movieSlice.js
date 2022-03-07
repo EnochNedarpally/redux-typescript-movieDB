@@ -17,14 +17,14 @@ const initialState= {
 }
 
 export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
-    async()=>{
-    const response = await movieApi.get(`?s=man&apikey=${APIKEY}&type=movie`)
+    async(input)=>{
+    const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=movie`)
     return response.data
   } 
 )
 export const getAsyncShows=createAsyncThunk("movies/getAsyncShows",
-    async()=>{
-    const response = await movieApi.get(`?s=how&apikey=${APIKEY}&type=series`)
+    async(input)=>{
+    const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=series`)
     return response.data
   } 
 )
@@ -57,10 +57,18 @@ export const movieSlice = createSlice({
         state.error=true
       },
       [getAsyncShows.fulfilled.type]:(state,{payload})=>{
-        return {...state,shows:payload}
+        return {...state,shows:payload,loading:false}
+      },
+      [getSingleMovieorShow.pending.type]:(state)=>{
+        state.loading=true
+        state.error=false
+      },
+      [getSingleMovieorShow.rejected.type]:(state)=>{
+        state.loading=false
+        state.error=true
       },
       [getSingleMovieorShow.fulfilled.type]:(state,{payload})=>{
-        return {...state,single:payload}
+        return {...state,single:payload,loading:false}
       },
   }
 })

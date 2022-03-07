@@ -18,7 +18,8 @@ Title: string,
 Year: string,
 imdbID: string,
 imdbRating: string,
-imdbVotes: string
+imdbVotes: string,
+Error?:string
 }
 
 export interface MovieActions{
