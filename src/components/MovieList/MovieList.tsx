@@ -19,7 +19,7 @@ const MovieList = () => {
     //@ts-ignore
     dispatch(getAsyncShows(input));
   }, [dispatch,input])
-  console.log(input)
+  
   return (
     <div className='movieListContainer'>
       <div className="inputContainer">
