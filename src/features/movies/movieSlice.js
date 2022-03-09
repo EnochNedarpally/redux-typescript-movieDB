@@ -19,13 +19,14 @@ const initialState= {
 export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
     async(input)=>{
     const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=movie`)
-    return response.data
+    console.log(response.data.Search)
+    return response.data.Search
   } 
 )
 export const getAsyncShows=createAsyncThunk("movies/getAsyncShows",
     async(input)=>{
     const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=series`)
-    return response.data
+    return response.data.Search
   } 
 )
 export const getSingleMovieorShow=createAsyncThunk("movies/getSingleMovieorShow",
@@ -75,5 +76,5 @@ export const movieSlice = createSlice({
 export const { clearMovieorShow } = movieSlice.actions
 export const getAllMovies = state=>state.movies.movies;
 export const getAllShows = state=>state.movies.shows;
-export const getMovieorShow = state=>state.movies.single;
+export const getMovieorShow = state=>state.movies.single;    
 export default movieSlice.reducer

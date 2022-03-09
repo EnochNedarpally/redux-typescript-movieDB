@@ -28,10 +28,10 @@ const MovieList = () => {
       </div>
       <h2>Movies</h2>
       <div className='movieListWrapper'>
-        {!movies.Search ? (
+        {!movies ? (
           <div>Sorry failed to load movies...</div>
         ) :
-          movies.Search.map((movie:Movies) =>
+          movies.map((movie:Movies) =>
           (
             <MovieCard key={movie.imdbID} movie={movie} />
           ))
@@ -39,10 +39,10 @@ const MovieList = () => {
       </div>
         <h2>Series</h2>
       <div className='showWrapper'>
-        {!shows.Search ? (
+        {!shows ? (
           <div>Sorry failed to load shows...</div>
         ) :
-          shows.Search.map((show:Movies) =>
+          shows.map((show:Movies) =>
           (
             <MovieCard key={show.imdbID} movie={show} />
           ))
