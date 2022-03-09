@@ -9,8 +9,8 @@ import { APIKEY } from '../../common/api/movieApiKey'
 // }
 
 const initialState= {
-  movies:{},
-  shows:{}, 
+  movies:[],
+  shows:[], 
   single:{},
   loading:false,
   error:false,
