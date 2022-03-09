@@ -1,30 +1,31 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import movieApi from '../../common/api/movieApi'
 import { APIKEY } from '../../common/api/movieApiKey'
-
-// type iState = {
-//   movies:Movies[],
-//   shows:Movies[],
-//   single:SingleMovieShow[],
-// }
-
+import { Movies ,SingleMovieShow} from '../../types/movie'
+import { RootState } from '../store'
 const initialState= {
-  movies:[],
-  shows:[], 
-  single:{},
+  movies:[{} as Movies ],
+  shows:[{} as Movies ], 
+  single:<SingleMovieShow>{},
   loading:false,
   error:false,
 }
+type iState = {
+    movies?: Movies[];
+    shows?: Movies[];
+    single?: SingleMovieShow;
+    loading?: boolean;
+    error?: boolean;
+}
 
 export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
-    async(input)=>{
+    async(input:string)=>{
     const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=movie`)
-    console.log(response.data.Search)
     return response.data.Search
   } 
 )
 export const getAsyncShows=createAsyncThunk("movies/getAsyncShows",
-    async(input)=>{
+    async(input:string)=>{
     const response = await movieApi.get(`?s=${input}&apikey=${APIKEY}&type=series`)
     return response.data.Search
   } 
@@ -42,12 +43,12 @@ export const movieSlice = createSlice({
   name: 'movies', 
   initialState,
   reducers: {
-    clearMovieorShow: (state) => {
+    clearMovieorShow: (state:iState) => {
       state.single = {}
     }
   },
   extraReducers:{
-      [getAsyncMovies.pending.type]:(state)=>{
+      [getAsyncMovies.pending.type]:(state:iState)=>{
         state.loading=true
       },
       [getAsyncMovies.fulfilled.type]:(state,{payload})=>{
@@ -74,7 +75,7 @@ export const movieSlice = createSlice({
   }
 })
 export const { clearMovieorShow } = movieSlice.actions
-export const getAllMovies = state=>state.movies.movies;
-export const getAllShows = state=>state.movies.shows;
-export const getMovieorShow = state=>state.movies.single;    
+export const getAllMovies = (state:RootState)=>state.movies.movies;
+export const getAllShows = (state:RootState)=>state.movies.shows;
+export const getMovieorShow = (state:RootState)=>state.movies.single;   
 export default movieSlice.reducer

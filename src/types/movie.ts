@@ -6,19 +6,19 @@ export interface Movies{
     Poster:string,
 }
 export interface SingleMovieShow{
-Actors: string,
-Awards: string,
-Director: string,
-Genre: string,
-Language: string,
-Plot: string,
-Poster: string,
-Runtime: string,
-Title: string,
-Year: string,
-imdbID: string,
-imdbRating: string,
-imdbVotes: string,
+Actors?: string,
+Awards?: string,
+Director?: string,
+Genre?: string,
+Language?: string,
+Plot?: string,
+Poster?: string,
+Runtime?: string,
+Title?: string,
+Year?: string,
+imdbID?: string,
+imdbRating?: string,
+imdbVotes?: string,
 Error?:string
 }
 

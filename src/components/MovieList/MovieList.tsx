@@ -1,6 +1,6 @@
 import { Search } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../features/hook';
 // import movieApi from '../../common/api/movieApi'
 // import { APIKEY } from '../../common/api/movieApiKey'
 import { getAllMovies, getAllShows, getAsyncMovies, getAsyncShows } from '../../features/movies/movieSlice'
@@ -9,14 +9,12 @@ import MovieCard from '../MovieCard/MovieCard';
 import "./MovieList.scss";
 
 const MovieList = () => {
-  const dispatch = useDispatch();
-  const movies = useSelector(getAllMovies);
-  const shows = useSelector(getAllShows);
+  const dispatch = useAppDispatch();
+  const movies = useAppSelector(getAllMovies);
+  const shows = useAppSelector(getAllShows);
   const [input, setInput] = useState<string>("Man")
   useEffect(() => {
-    //@ts-ignore
     dispatch(getAsyncMovies(input));
-    //@ts-ignore
     dispatch(getAsyncShows(input));
   }, [dispatch,input])
   

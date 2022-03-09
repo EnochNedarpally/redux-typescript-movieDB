@@ -9,7 +9,7 @@ import NotFound from '../NotFound/NotFound';
 import "./Movie.scss"
 const Movie = () => {
   const dispatch = useAppDispatch();  
-  const item = useAppSelector<SingleMovieShow>(getMovieorShow);
+  const item = useAppSelector(getMovieorShow);
   const loading = useAppSelector<boolean>(state => state.movies.loading);
   const id = useParams().id;
 
