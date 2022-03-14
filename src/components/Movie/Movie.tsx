@@ -17,7 +17,6 @@ const Movie = () => {
   //   getSingleMovieorShow(id:string):AsyncThunk<any, void, {}>
   // }
   useEffect(() => {
-    //@ts-ignore 
     dispatch(getSingleMovieorShow(id));
     return (() => {
       dispatch(clearMovieorShow());

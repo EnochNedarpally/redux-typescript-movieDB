@@ -31,7 +31,7 @@ const MovieList = () => {
         ) :
           movies.map((movie:Movies) =>
           (
-            <MovieCard key={movie.imdbID} movie={movie} />
+            <MovieCard key={movie.Poster} movie={movie} />
           ))
         }
       </div>
@@ -42,7 +42,7 @@ const MovieList = () => {
         ) :
           shows.map((show:Movies) =>
           (
-            <MovieCard key={show.imdbID} movie={show} />
+            <MovieCard key={show.Poster} movie={show} />
           ))
         }
       </div>

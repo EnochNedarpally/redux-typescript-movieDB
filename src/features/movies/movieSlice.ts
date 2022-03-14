@@ -10,13 +10,7 @@ const initialState= {
   loading:false,
   error:false,
 }
-type iState = {
-    movies?: Movies[];
-    shows?: Movies[];
-    single?: SingleMovieShow;
-    loading?: boolean;
-    error?: boolean;
-}
+
 
 export const getAsyncMovies=createAsyncThunk("movies/getAsyncMovies",
     async(input:string)=>{
@@ -31,7 +25,7 @@ export const getAsyncShows=createAsyncThunk("movies/getAsyncShows",
   } 
 )
 export const getSingleMovieorShow=createAsyncThunk("movies/getSingleMovieorShow",
-    async(id)=>{
+    async(id:string|undefined)=>{
     const response = await movieApi.get(`?i=${id}&apikey=${APIKEY}`)
     return response.data
   } 
@@ -43,12 +37,12 @@ export const movieSlice = createSlice({
   name: 'movies', 
   initialState,
   reducers: {
-    clearMovieorShow: (state:iState) => {
+    clearMovieorShow: (state) => {
       state.single = {}
     }
   },
   extraReducers:{
-      [getAsyncMovies.pending.type]:(state:iState)=>{
+      [getAsyncMovies.pending.type]:(state)=>{
         state.loading=true
       },
       [getAsyncMovies.fulfilled.type]:(state,{payload})=>{
